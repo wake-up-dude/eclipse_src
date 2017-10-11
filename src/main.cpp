@@ -18,8 +18,7 @@ int main(){
 	// initial the sudo box
 	initial_matrix(box,(&Num_empty));
 
-	//using check func, also able to check the final result
-	//hit_check(box);
+
 
 	// outer do while looping until solved
 	do{
@@ -33,6 +32,8 @@ int main(){
 		*/
 	}while(0);//(Num_empty = 0);
 
+	//using check func, also able to check the final result
+		//hit_check(box);cout << Num_empty << endl;
 
 	/*test section begin
 	cout << box[5][4].x << endl;

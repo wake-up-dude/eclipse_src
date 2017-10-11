@@ -57,7 +57,7 @@ void initial_sec(int x_col, int y_row, int * sec_x, int * sec_y);
 
 //initial the reserve list for the matrix, should include in the matrix, or
 //the function should be replaced by update_reserve_list sth
-void initial_array(int r_array[], int d_array[]);
+void initial_array(int r_array[], int d_array[], int q_hit);
 
 
 #endif /* INITIAL_H_ */

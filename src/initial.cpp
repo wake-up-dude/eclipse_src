@@ -52,13 +52,17 @@ void initial_matrix (struct sudo box[][10], int * Num_of_empty){
 			//check hit and update hit, number_left
 			if (convert_line == 0){
 				box[x_col][y_row].hit = 0;
+				box[x_col][y_row].Num_R = 9;
+
 			}else{
 				box[x_col][y_row].hit = convert_line; //store the provided number
 				(*Num_of_empty) --; 	//update the empty boxes left number here
+				box[x_col][y_row].Num_R = 0;
 			}
 
 			//initial array inside the box
-			initial_array(box[x_col][y_row].Reserve,box[x_col][y_row].Decline);
+			initial_array(box[x_col][y_row].Reserve,box[x_col][y_row].Decline,convert_line);
+
 		}
 	}
 	return;
@@ -84,13 +88,26 @@ void initial_sec(int x_col, int y_row, int * sec_x, int * sec_y){
 
 //initial the reserve list for the matrix, should include in the matrix, or
 //the function should be replaced by update_reserve_list sth
-void initial_array(int r_array[], int d_array[]){
+void initial_array(int r_array[], int d_array[], int q_hit){
 	//failed to use the copy function, retry it later !!!!!
 	//int all_reserved[10] = {0,1,2,3,4,5,6,7,8,9};
 	//copy(all_reserved, all_reserved+2, x);
+	if(q_hit == 0){
 	for (int index= 1; index <10; index ++){
-		r_array[index]=1;
+		r_array[index]=0;
+		//3,6 means update the other two col...balabla
+		//1 means it has be shown in that col, row or section
+		//set to 0 means these number has not been occupied, possible solution
 		d_array[index]=0;
+	}
+	}else{
+		for (int index= 1; index <10; index ++){
+			r_array[index]=1;
+			//3,6 means update the other two col...balabla
+			//1 means it has be shown in that col, row or section
+			//set to 0 means these number has not been occupied, possible solution
+			d_array[index]=0;
+		}
 	}
 	return;
 }
