@@ -37,7 +37,7 @@ void checking(struct sudo box[][10]){
 				update_res(box,x,y,0,hit);//0 for x update, 1 for y
 				update_res(box,x,y,1,hit);//1 for updating along y axis
 				update_sec(box,box[x][y].sec_x,box[x][y].sec_y,hit);//updating with the section
-				check_33_sec(box,box[x][y].sec_x,box[x][y].sec_y,hit);
+				//check_33_sec(box,box[x][y].sec_x,box[x][y].sec_y,hit);
 			}
 		}
 	}
@@ -152,6 +152,87 @@ int return_hit(int *Reserve_array, int number_left){
 	}
 	return 0;
 }
+///////////////
+void hit_check_xy(struct sudo box[][10]){
+	for(int num=1; num < 10; num ++){
+		for(int xory=1; xory <10; xory ++){
+			x_solving(num, xory);
+			y_solving(num, xory);
+		}
+		//for for section_solving
+		for(int sec_y=1; sec_y < 8; sec_y= sec_y+3){
+			for(int sec_x=1; sec_x < 8; sec_x= sec_x+3){
+				sect_solving(sec_x, sec_y,num);
+			}
+		}
+	}
+}
+
+void x_solving(int num, int xory){
+	int count = 0;
+	int idx;
+	for (int index=1; index<10; index++){
+		if(box[index][xory].Reserve[num]==0){
+			count ++;
+			idx = index;
+		}
+	}
+	if(count == 1){
+		update_hit(idx,0,xory,num);
+	}
+}
+
+void y_solving(int num, int xory){
+	int count = 0;
+	int idy;
+	for (int index=1; index<10; index++){
+		if(box[num][index].Reserve[num]==0){
+			count ++;
+			idy = index;
+		}
+	}
+	if(count == 1){
+		update_hit(0,idy,xory,num);
+	}
+}
+
+void sect_solving(sec_x, sec_y,num){
+	int count = 0;
+	int r_x;
+	int r_y;
+	for(int y = 1; y<4; y++){
+		for(int x = 1; x<4; x++){
+			if(box[x][y].Reserve[num]==0){
+				count ++;
+				r_x = x;
+				r_y = y;
+			}
+		}
+	}
+	if(count == 1){
+		update_hit_sec(x,y,num);
+	}
+}
+//////////////////////
+void update_hit(int idx, int idy, int xory, int num){
+	if(idx != 0){
+		box[idx][xory].Reserve[num] = 1;
+		box[idx][xory].hit = num;
+		update_Num_empty();
+	}
+	if(idy != 0){
+		box[xory][idy].Reserve[num] = 1;
+		box[xory][idy].hit = num;
+		update_Num_empty();
+	}
+}
+
+void update_hit_sec(int x, int y, int num){
+	box[x][y].Reserve[num] = 1;
+	box[x][y].hit = num;
+	update_Num_empty();
+}
+
 //////////////////////////////////////////||||||||||||||||
 //global function to decrement the Num_empty...ei.. how?....
 void update_Num_empty(){
