@@ -26,6 +26,12 @@ int return_hit(int *Reserve_array, int number_left);
 
 void update_hit(int idx, int idy, int xory, int num);
 
+void hit_check_xy(struct sudo box[][10]);
+
+void x_solving(int num, int xory);
+
+void y_solving(int num, int xory);
+
 void update_Num_empty();
 
 #endif /* SOLVER_FUNC_H_ */
