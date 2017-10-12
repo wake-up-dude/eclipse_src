@@ -24,4 +24,6 @@ void update_res(struct sudo box[][10], int x, int y, int x_y, int hit);
 
 int return_hit(int *Reserve_array, int number_left);
 
+void update_Num_empty();
+
 #endif /* SOLVER_FUNC_H_ */

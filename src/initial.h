@@ -45,6 +45,8 @@ struct sudo{
 
 };
 
+extern int Num_empty; //9*9 matrix boxes, unsolved
+
 //check fucntion, to check the box values
 void hit_check(struct sudo box[][10]);
 

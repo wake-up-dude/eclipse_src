@@ -3,6 +3,8 @@
 #include "solver_func.h"
 using namespace std;
 
+int Num_empty;
+
 int main(){
 	//welcome message
 	cout << "I am in main now, first row running" << endl;
@@ -13,12 +15,10 @@ int main(){
 
 	// declare the sudo box
 	sudo box[10][10];
-	int Num_empty = 81; //9*9 matrix boxes, unsolved
+	Num_empty = 81; //9*9 matrix boxes, unsolved
 
 	// initial the sudo box
 	initial_matrix(box,(&Num_empty));
-
-
 
 	// outer do while looping until solved
 	do{

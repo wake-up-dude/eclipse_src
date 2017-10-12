@@ -24,6 +24,7 @@ void solver(struct sudo box[][10]){
 	check_sec(box);
 
 	*/
+	update_Num_empty();
 }
 
 void checking(struct sudo box[][10]){
@@ -142,6 +143,7 @@ int return_hit(int *Reserve_array, int number_left){
 		for(int check =1; check < 10;check ++){
 			if(Reserve_array[check] == 0){
 				Reserve_array[check] = 1;// hit found, update hit, and return the number to hit.
+				update_Num_empty();
 				return check;
 			}
 		}
@@ -152,5 +154,8 @@ int return_hit(int *Reserve_array, int number_left){
 }
 //////////////////////////////////////////||||||||||||||||
 //global function to decrement the Num_empty...ei.. how?....
+void update_Num_empty(){
+	Num_empty--;
+}
 
 #endif /* SOLVER_FUNC_CPP_ */
