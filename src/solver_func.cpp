@@ -154,10 +154,40 @@ int return_hit(int *Reserve_array, int number_left){
 }
 ///////////////
 void hit_check_xy(struct sudo box[][10]){
-	for(int num=0; num <){
-		for(){
-			;
+	for(int num=1; num < 10; num ++){
+		for(int xory=1; xory <10; xory ++){
+			x_solving(num, xory);
+			y_solving(num, xory);
 		}
+		//for for section_solving
+	}
+}
+
+void x_solving(int num, int xory){
+	int count = 0;
+	int idx;
+	for (int index=1; index<10; index++){
+		if(box[index][xory].Reserve[num]==0){
+			count ++;
+			idx = index;
+		}
+	}
+	if(count == 1){
+		update_hit(idx,0,xory,num);
+	}
+}
+
+void y_solving(int num, int xory){
+	int count = 0;
+	int idy;
+	for (int index=1; index<10; index++){
+		if(box[num][index].Reserve[num]==0){
+			count ++;
+			idy = index;
+		}
+	}
+	if(count == 1){
+		update_hit(0,idy,xory,num);
 	}
 }
 //////////////////////
