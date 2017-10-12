@@ -152,7 +152,15 @@ int return_hit(int *Reserve_array, int number_left){
 	}
 	return 0;
 }
-
+///////////////
+void hit_check_xy(struct sudo box[][10]){
+	for(int num=0; num <){
+		for(){
+			;
+		}
+	}
+}
+//////////////////////
 void update_hit(int idx, int idy, int xory, int num){
 	if(idx != 0){
 		box[idx][xory].Reserve[num] = 1;
