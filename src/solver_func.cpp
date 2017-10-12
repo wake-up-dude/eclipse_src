@@ -17,9 +17,8 @@ void solver(struct sudo box[][10]){
 	cout << box[5][4].Reserve[3]<< endl;
 
 	//call three solver functions
-	check_x(box);
+	checking(box);
 
-	//check_y(box);
 	cout << "if it is 2, then wow !!: " << box[5][7].hit << endl;
 	/*
 	check_sec(box);
@@ -27,7 +26,7 @@ void solver(struct sudo box[][10]){
 	*/
 }
 
-void check_x(struct sudo box[][10]){
+void checking(struct sudo box[][10]){
 	int hit;
 
 	for(int y=1;y<10;y++){
@@ -35,18 +34,24 @@ void check_x(struct sudo box[][10]){
 			if(box[x][y].hit != 0){
 				hit = box[x][y].hit;//the actually number, solved or pre-saved
 				update_res(box,x,y,0,hit);//0 for x update, 1 for y
-				update_res(box,x,y,1,hit);
+				update_res(box,x,y,1,hit);//1 for updating along y axis
+				update_sec(box,box[x][y].sec_x,box[x][y].sec_y,hit);//updating with the section
+				check_33_sec(box,box[x][y].sec_x,box[x][y].sec_y,hit);
 			}
 		}
 	}
 }
 
-void check_y(struct sudo box[][10]){
-	;
-}
-
-void check_sec(struct sudo box[][10]){
-	;
+void update_sec(struct sudo box[][10],int sec_x, int sec_y, int hit){
+	for(int y = sec_y; y < (sec_y + 3); y++){
+		for(int x = sec_x; x < (sec_x + 3); x++){
+			if( box[x][y].Reserve[hit] == 0){
+				box[x][y].Reserve[hit] = 1;
+				box[x][y].Num_R--;
+				box[x][y].hit = return_hit(box[x][y].Reserve, box[x][y].Num_R);
+			}
+		}
+	}
 }
 
 void update_res(struct sudo box[][10], int x, int y, int x_y, int hit){
@@ -71,8 +76,65 @@ void update_res(struct sudo box[][10], int x, int y, int x_y, int hit){
 		}
 	}
 }
-void update_del(){
-	;
+
+void check_33_sec(struct sudo box[][10],int sec_x, int sec_y, int hit){
+
+////////////checking along x direction
+	int count = 0;
+	int imhit_3 = 0;
+
+	int survive_index_y;
+
+	for(int y = sec_y; y < (sec_y + 3); y++){
+		for(int x = sec_x; x < (sec_x + 3); x++){
+			if( box[x][y].Reserve[hit] == 1){
+				count++;
+			}
+		}
+		if(count == 3){
+			imhit_3++;
+		}else{
+			survive_index_y = y;
+		}
+		count = 0;// reset count, to check 3 consecutive impossible to hit
+	}
+
+	//update the parallel section's reserve array, if there r 2 consecutive unhit
+	if (imhit_3 == 2){// there are 2 consecutive row with imhit, so the left one should be
+		for(int temp = 1; temp < 10; temp++){
+			if(temp<sec_x || temp >(sec_x+3)){
+				box[temp][survive_index_y].Reserve[hit] = 1;
+			}
+		}
+	}
+////////////////////////////////////////////////////////////////////
+	////checking along y section direction|||
+	count = 0;
+	imhit_3 = 0;
+	int survive_index_x;
+	for(int x = sec_x; x < (sec_x + 3); x++){
+		for(int y = sec_y; y < (sec_y + 3); y++){
+			if( box[x][y].Reserve[hit] == 1){
+				count++;
+			}
+		}
+		if(count == 3){
+			imhit_3++;
+		}else{
+			survive_index_x = x;
+		}
+		count = 0;// reset count, to check 3 consecutive impossible to hit
+	}
+
+	if (imhit_3 == 2){// there are 2 consecutive row with imhit, so the left one should be
+		for(int temp = 1; temp < 10; temp++){
+			if(temp<sec_y || temp >(sec_y+3)){
+				box[survive_index_x][temp].Reserve[hit] = 1;
+			}
+		}
+	}
+
+
 }
 
 int return_hit(int *Reserve_array, int number_left){

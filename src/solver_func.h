@@ -14,15 +14,13 @@ using namespace std;
 
 void solver(struct sudo box[][10]);
 
-void check_x(struct sudo box[][10]);
+void checking(struct sudo box[][10]);
 
-void check_y(struct sudo box[][10]);
+void update_sec(struct sudo box[][10], int sec_x, int sec_y, int hit);
 
-void check_sec(struct sudo box[][10]);
+void check_33_sec(struct sudo box[][10],int sec_x, int sec_y, int hit);
 
 void update_res(struct sudo box[][10], int x, int y, int x_y, int hit);
-
-void update_del();
 
 int return_hit(int *Reserve_array, int number_left);
 
