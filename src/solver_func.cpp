@@ -37,7 +37,7 @@ void checking(struct sudo box[][10]){
 				update_res(box,x,y,0,hit);//0 for x update, 1 for y
 				update_res(box,x,y,1,hit);//1 for updating along y axis
 				update_sec(box,box[x][y].sec_x,box[x][y].sec_y,hit);//updating with the section
-				check_33_sec(box,box[x][y].sec_x,box[x][y].sec_y,hit);
+				//check_33_sec(box,box[x][y].sec_x,box[x][y].sec_y,hit);
 			}
 		}
 	}
@@ -152,6 +152,20 @@ int return_hit(int *Reserve_array, int number_left){
 	}
 	return 0;
 }
+
+void update_hit(int idx, int idy, int xory, int num){
+	if(idx != 0){
+		box[idx][xory].Reserve[num] = 1;
+		box[idx][xory].hit = num;
+		update_Num_empty();
+	}
+	if(idy != 0){
+		box[xory][idy].Reserve[num] = 1;
+		box[xory][idy].hit = num;
+		update_Num_empty();
+	}
+}
+
 //////////////////////////////////////////||||||||||||||||
 //global function to decrement the Num_empty...ei.. how?....
 void update_Num_empty(){
