@@ -30,10 +30,11 @@ int main(){
 			}
 		}
 		*/
-	}while(0);//(Num_empty = 0);
+		cout << "unsolved number remains: " << Num_empty << endl;
+	}while(Num_empty != 0);//(Num_empty = 0);
 
 	//using check func, also able to check the final result
-		//hit_check(box);cout << Num_empty << endl;
+		hit_check(box);//cout << Num_empty << endl;
 
 	/*test section begin
 	cout << box[5][4].x << endl;
