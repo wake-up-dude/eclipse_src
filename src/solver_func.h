@@ -32,6 +32,10 @@ void x_solving(int num, int xory);
 
 void y_solving(int num, int xory);
 
+void update_hit_sec(int x, int y, int num);
+
+void sect_solving(sec_x, sec_y,num);
+  
 void update_Num_empty();
 
 #endif /* SOLVER_FUNC_H_ */
