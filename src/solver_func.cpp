@@ -160,6 +160,11 @@ void hit_check_xy(struct sudo box[][10]){
 			y_solving(num, xory);
 		}
 		//for for section_solving
+		for(int sec_y=1; sec_y < 8; sec_y= sec_y+3){
+			for(int sec_x=1; sec_x < 8; sec_x= sec_x+3){
+				sect_solving(sec_x, sec_y,num);
+			}
+		}
 	}
 }
 
@@ -190,6 +195,24 @@ void y_solving(int num, int xory){
 		update_hit(0,idy,xory,num);
 	}
 }
+
+void sect_solving(sec_x, sec_y,num){
+	int count = 0;
+	int r_x;
+	int r_y;
+	for(int y = 1; y<4; y++){
+		for(int x = 1; x<4; x++){
+			if(box[x][y].Reserve[num]==0){
+				count ++;
+				r_x = x;
+				r_y = y;
+			}
+		}
+	}
+	if(count == 1){
+		update_hit_sec(x,y,num);
+	}
+}
 //////////////////////
 void update_hit(int idx, int idy, int xory, int num){
 	if(idx != 0){
@@ -202,6 +225,12 @@ void update_hit(int idx, int idy, int xory, int num){
 		box[xory][idy].hit = num;
 		update_Num_empty();
 	}
+}
+
+void update_hit_sec(int x, int y, int num){
+	box[x][y].Reserve[num] = 1;
+	box[x][y].hit = num;
+	update_Num_empty();
 }
 
 //////////////////////////////////////////||||||||||||||||
