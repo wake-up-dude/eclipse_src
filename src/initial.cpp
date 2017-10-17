@@ -33,7 +33,7 @@ void initial_matrix (struct sudo box[][10], int * Num_of_empty){
 
 	//using raw_data to save the original sudo question
 	string line;
-	ifstream file("tester1.txt");
+	ifstream file("hard.txt");
 	int convert_line;
 
 	for(y_row=1; y_row<10; y_row++){
